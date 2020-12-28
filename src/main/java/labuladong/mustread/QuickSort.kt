@@ -9,17 +9,24 @@ fun main() {
     array.println()
 }
 
+/**
+ * 取第一个元素为基准
+ */
 fun quickSortFromStart(array: Array<Int>, left: Int, right: Int, pivotPosition: Int) {
     if (left >= right) {
         return
     }
-    val position = partitionFromStart(array, left, right, pivotPosition)
+    val position = partitionFromPosition(array, left, right, pivotPosition)
     quickSortFromStart(array, left, position - 1, left)
     quickSortFromStart(array, position + 1, right, position + 1)
     array.println()
 }
 
-fun partitionFromStart(array: Array<Int>, left: Int, right: Int, pivotPosition: Int): Int {
+/**
+ * 取n个元素为基准
+ * @param pivotPosition
+ */
+fun partitionFromPosition(array: Array<Int>, left: Int, right: Int, pivotPosition: Int): Int {
     val pivotValue = array[pivotPosition]
     var pivotOffset = left
     array.swap(pivotPosition, right)
