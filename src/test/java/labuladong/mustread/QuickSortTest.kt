@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import println
 import quickSort
 import quickSortFromStart
+import quickSortThreePart
 
 class QuickSortTest {
 
@@ -27,6 +28,18 @@ class QuickSortTest {
         array.println()
 
         quickSort(array, 0, array.size - 1)
+
+        val expect = arrayOf(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7)
+        Assertions.assertArrayEquals(expect, array)
+    }
+
+    @Test
+    fun should_sort_when_quickSortThreePart_given_array() {
+
+        val array = arrayOf(2, 6, 1, 4, 7, 3, 5, 1, 2, 3, 4, 5, 6, 7)
+        array.println()
+
+        quickSortThreePart(array, 0, array.size - 1)
 
         val expect = arrayOf(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7)
         Assertions.assertArrayEquals(expect, array)

@@ -19,7 +19,7 @@ fun quickSortFromStart(array: Array<Int>, left: Int, right: Int, pivotPosition: 
     val position = partitionFromPosition(array, left, right, pivotPosition)
     quickSortFromStart(array, left, position - 1, left)
     quickSortFromStart(array, position + 1, right, position + 1)
-    array.println()
+//    array.println()
 }
 
 /**
@@ -96,10 +96,50 @@ fun partitionFromMiddle(array: Array<Int>, start: Int, end: Int): Int {
             return j
         }
         array.swap(i, j)
-        println("swap i = $i, j = $j, pivot = $pivot")
-        array.println()
+//        println("swap i = $i, j = $j, pivot = $pivot")
+//        array.println()
         i++
         j--
     } while (true)
+}
+
+
+/**
+ * 三路快排
+ */
+fun quickSortThreePart(array: Array<Int>, left: Int, right: Int) {
+    if (left >= right) {
+        return
+    }
+
+    val position = partitionOfThreeDivision(array, left, right)
+    quickSortThreePart(array, left, position[0])
+    quickSortThreePart(array, position[1], right)
+}
+
+fun partitionOfThreeDivision(array: Array<Int>, left: Int, right: Int): IntArray {
+    val position = IntArray(2)
+    val pivotValue = array[left]
+    var pLeft = left + 1
+    var pRight = right
+    var index = left + 1
+    do {
+        val current = array[index]
+        if (current == pivotValue) {
+            index++
+        } else if (current > pivotValue) {
+            array.swap(index, pRight)
+            pRight--
+        } else {
+            array.swap(index, pLeft)
+            pLeft++
+            index++
+        }
+    } while (index < pRight)
+    array.swap(left, --pLeft)
+
+    position[0] = --pLeft
+    position[1] = pRight
+    return position
 }
 
